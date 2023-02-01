@@ -15,15 +15,26 @@ public class RabbitMQConfig {
     @Value("${rabbitmq.queue.invoice.name}")
     private String invoiceQueue;
 
+    @Value("${rabbitmq.queue.email.name}")
+    private String emailQueue;
+
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
 
     @Value(("${rabbitmq.binding.routing.key}"))
     private String invoiceRoutingKey;
 
+    @Value(("${rabbitmq.binding.email.routing.key}"))
+    private String emailRoutingKey;
+
     @Bean
     public Queue invoiceQueue() {
         return new Queue(invoiceQueue);
+    }
+
+    @Bean
+    public Queue emailQueue() {
+        return new Queue(emailQueue);
     }
 
     @Bean
@@ -37,6 +48,14 @@ public class RabbitMQConfig {
                 .bind(invoiceQueue())
                 .to(exchange())
                 .with(invoiceRoutingKey);
+    }
+
+    @Bean
+    public Binding newsLetterBinding() {
+        return BindingBuilder
+                .bind(emailQueue())
+                .to(exchange())
+                .with(emailRoutingKey);
     }
 
     @Bean

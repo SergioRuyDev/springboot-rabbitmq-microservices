@@ -1,10 +1,10 @@
-package com.sergioruy.newsletterservice;
+package com.sergioruy.emailservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NewsletterServiceApplicationTests {
+class EmailServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

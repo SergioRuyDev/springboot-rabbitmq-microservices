@@ -18,6 +18,9 @@ public class InvoiceProducer {
     @Value("${rabbitmq.binding.routing.key}")
     private String invoiceRoutingKey;
 
+    @Value("${rabbitmq.binding.email.routing.key}")
+    private String emailRoutingKey;
+
     private RabbitTemplate rabbitTemplate;
 
     public InvoiceProducer(RabbitTemplate rabbitTemplate) {
@@ -26,6 +29,11 @@ public class InvoiceProducer {
 
     public void sendMessage(InvoiceEvent invoiceEvent) {
         LOGGER.info("Invoice Event Sent to RabbitMQ => {}", invoiceEvent.toString());
+
+        //Send the event to Invoice Queue
         rabbitTemplate.convertAndSend(exchange, invoiceRoutingKey, invoiceEvent);
+
+        //Send the event to Email Queue
+        rabbitTemplate.convertAndSend(exchange, emailRoutingKey, invoiceEvent);
     }
 }

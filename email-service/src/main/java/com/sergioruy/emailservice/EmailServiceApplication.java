@@ -1,13 +1,13 @@
-package com.sergioruy.newsletterservice;
+package com.sergioruy.emailservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NewsletterServiceApplication {
+public class EmailServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NewsletterServiceApplication.class, args);
+		SpringApplication.run(EmailServiceApplication.class, args);
 	}
 
 }
